@@ -5,7 +5,7 @@ import Stripe from 'stripe'
 import { createServiceClient } from '@/lib/supabase/server'
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: '2024-06-20',
+  apiVersion: '2026-02-25.clover',
 })
 
 export async function POST(req: Request) {
@@ -43,8 +43,7 @@ export async function POST(req: Request) {
         trial_end:              subscription.trial_end
           ? new Date(subscription.trial_end * 1000).toISOString()
           : null,
-        current_period_end: new Date(subscription.current_period_end * 1000).toISOString(),
-      })
+          current_period_end: new Date((subscription as any).current_period_end * 1000).toISOString(),      })
       break
     }
 
@@ -56,8 +55,7 @@ export async function POST(req: Request) {
         .from('subscriptions')
         .update({
           status:             subscription.status,
-          current_period_end: new Date(subscription.current_period_end * 1000).toISOString(),
-          plan:               getPlanFromPriceId(subscription.items.data[0].price.id),
+          current_period_end: new Date((subscription as any).current_period_end * 1000).toISOString(),          plan:               getPlanFromPriceId(subscription.items.data[0].price.id),
         })
         .eq('stripe_subscription_id', subscription.id)
       break
