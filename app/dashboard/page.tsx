@@ -71,7 +71,7 @@ export default function DashboardPage() {
   const [user, setUser] = useState<any>(null)
 
   // Initialize Supabase
-  const supabase = createBrowserClient(
+  const supabase = createClientComponentClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
   )
