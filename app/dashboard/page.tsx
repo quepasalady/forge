@@ -2,8 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import { createBrowserClient } from '@supabase/ssr'
-
+import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 type Page = 'dashboard' | 'workouts' | 'nutrition' | 'weight' | 'subscription'
 type WorkoutMode = 'auto' | 'assisted'
 
